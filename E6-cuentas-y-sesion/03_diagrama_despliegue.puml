@@ -1,0 +1,20 @@
+@startuml
+title Diagrama de despliegue - Cuentas de jugador y sesion (RPG Manager)
+
+node "Equipo del jugador" as cliente {
+  artifact "Navegador web" as nav
+}
+node "Servidor de aplicacion (Java 21)" as app {
+  artifact "rpgmanager-cuentas.jar\n(vista, servicio, persistencia)" as jar
+}
+node "Servidor de base de datos" as dbsrv {
+  database "MariaDB\nBD rpgmanager" as db
+}
+node "Servidor de correo" as smtp {
+  artifact "Servicio SMTP" as mail
+}
+
+nav --> jar : HTTPS 443
+jar --> db : JDBC 3306
+jar --> mail : SMTP 587\n(RF-CUE-04)
+@enduml
